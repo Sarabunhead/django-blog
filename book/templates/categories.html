@@ -1,0 +1,29 @@
+{% extends 'base.html' %} {% block content %}
+
+{% if category_posts %}
+    <h1>{{ cats }}</h1>
+    <ul>
+    {% for post in category_posts %}
+    <li>
+        <a href="{% url 'article-ditail' post.pk %}">{{ post.title }}</a>
+        <p>{{ post.body|slice:":200"|safe }}</p
+        <small
+        ><a href="{% url 'update_post' post.pk %}"
+            >Edit <i class="bi bi-pencil-square"></i></a
+        ></small>
+        -
+        <small style="color: red; text-decoretion: none"
+        ><a href="{% url 'delete_post' post.pk %}"
+            >Delete <i class="bi bi-trash"></i></a
+        ></small>
+        <br />
+        {{ post.publish}}
+    </li>
+    {% endfor %}
+    </ul>
+
+{% else %}
+    Sorry This category is not Found
+{% endif %}
+
+category_posts {% endblock %}
